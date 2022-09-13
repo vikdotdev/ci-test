@@ -1,11 +1,11 @@
 name: Deploy
 on:
   workflow_run:
-    workflows: [Test]
-    types: [completed]
+    workflows:
+      - Test
 
 jobs:
-  test-1:
+  on-success:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
@@ -14,7 +14,7 @@ jobs:
           echo ${{ github.ref_name }}
           echo ${{ github.ref }}
           echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-  test-2:
+  on-failure:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
