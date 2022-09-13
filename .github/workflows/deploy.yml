@@ -3,6 +3,9 @@ on:
   workflow_run:
     workflows:
       - Test
+    branch:
+      - master
+      - production
 
 jobs:
   on-success:
