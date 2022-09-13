@@ -5,21 +5,21 @@ on:
       - Test
     branch:
       - master
+      - production
     types:
       - completed
 
 jobs:
-  on-success:
+  deploy-staging:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'master' }}
     steps:
-      - run: |
-          echo 'The triggering workflow passed'
-          echo ${{ github.ref_name }}
-          echo ${{ github.ref }}
-          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          echo ${{ github.event.workflow_run.head_branch }}
-          echo ${{ github.event.workflow_run.ref }}
+      - run: echo "ey-core deploy -e techvalidate_staging_v6 --ref ${{ github.event.workflow_run.head_branch }}"
+  deploy-production:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'production' }}
+    steps:
+      - run: echo "ey-core deploy -e techvalidate_production_v6 --ref ${{ github.event.workflow_run.head_branch }}"
   on-failure:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}

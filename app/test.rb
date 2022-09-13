@@ -8,3 +8,8 @@ puts 'test 4'
 # test 8
 # test 9
 # test 10
+# test stage
+# test stage 2
+# test stage 3
+# test stage 4
+# test prod
