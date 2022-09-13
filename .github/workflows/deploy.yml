@@ -6,6 +6,8 @@ on:
     branch:
       - master
       - production
+    types:
+      - completed
 
 jobs:
   on-success:
