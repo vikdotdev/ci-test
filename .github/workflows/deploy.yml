@@ -18,7 +18,7 @@ jobs:
           echo ${{ github.ref_name }}
           echo ${{ github.ref }}
           echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          echo ${{ github.event.head_branch }}
+          echo ${{ github.event.ref }}
   on-failure:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
