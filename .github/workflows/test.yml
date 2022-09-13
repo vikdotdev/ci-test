@@ -7,5 +7,5 @@ jobs:
     name: Wait
     runs-on: ubuntu-latest
     steps:
-      run: |
-        sleep 10
+      - name: Wait 10
+        run: sleep 10
