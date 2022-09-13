@@ -1,0 +1,11 @@
+name: Test
+on: push
+
+
+jobs:
+  wait:
+    name: Wait
+    runs-on: ubuntu-latest
+    steps:
+      run: |
+        sleep 10

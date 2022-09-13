@@ -1,0 +1,21 @@
+name: Deploy
+on:
+  workflow_run:
+    workflows: [Test]
+    types: [completed]
+
+jobs:
+  test-1:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - run: |
+          echo 'The triggering workflow passed'
+          echo ${{ github.ref_name }}
+          echo ${{ github.ref }}
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+  test-2:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'The triggering workflow failed'
