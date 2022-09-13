@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }} && ${{ github.event.workflow_run.head_branch }} == v13.x
     steps:
-      - run: echo "ey-core deploy -e ${{ techvalidate_staging_v6 }} --ref ${{ github.event.workflow_run.head_branch }}"
+      - run: echo "ey-core deploy -e techvalidate_staging_v6 --ref ${{ github.event.workflow_run.head_branch }}"
   deploy-production:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }} && ${{ github.event.workflow_run.head_branch }} == production
